@@ -25,7 +25,14 @@ public class ContactsUtil {
             ContactsContract.CommonDataKinds.Photo.CONTACT_ID,
             ContactsContract.RawContacts.VERSION};
 
-    private ArrayList<PhoneContact> getValidPhoneNumbers(Context context, String userDDD) {
+    /**
+     * Metodo responsavel por buscar contatos na agenda do dispositivo.
+     *
+     * @param context Contexto utilizado na chamada (ex. Activity, etc)
+     * @param userDDD String contendo o DDD do usuario do aplicativo, utilizado para determinar como DDD padrao em contatos sem DDD.
+     * @return ArrayList com todos os contatos validos.
+     */
+    public ArrayList<PhoneContact> getValidContacts(Context context, String userDDD) {
 
         Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
         String order = ContactsContract.Contacts.DISPLAY_NAME + " ASC";
@@ -35,13 +42,13 @@ public class ContactsUtil {
                 ContactsContract.Contacts.HAS_PHONE_NUMBER, null, order);
         ArrayList<PhoneContact> contacts = null;
         if (null != contactsCursor) {
-            contacts = getPhoneNumbers(contactsCursor, userDDD);
+            contacts = getContacts(contactsCursor, userDDD);
             contactsCursor.close();
         }
         return contacts;
     }
 
-    private ArrayList<PhoneContact> getPhoneNumbers(Cursor cursor, String userDDD) {
+    private ArrayList<PhoneContact> getContacts(Cursor cursor, String userDDD) {
         Set<PhoneContact> appContacts = new HashSet<>();
 
         while (cursor.moveToNext()) {

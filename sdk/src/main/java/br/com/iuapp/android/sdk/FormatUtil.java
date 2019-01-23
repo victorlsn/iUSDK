@@ -8,7 +8,7 @@ import android.util.Log;
 
 class FormatUtil {
 
-    public static String setToPhonePattern(String phone, String defaultDdd) {
+    static String setToPhonePattern(String phone, String defaultDdd) {
 
         int[] ddd = {11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 91, 93, 94, 92, 97, 95,
                 96, 98, 99, 31, 32, 33, 34, 35, 37, 38, 71, 73, 74, 75, 77, 79, 81, 87, 82, 83, 84,
